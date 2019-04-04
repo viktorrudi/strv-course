@@ -1,6 +1,6 @@
 // find eslint checker for vscode (activate in settings)
 
-//Makefile (mac)
+// Makefile (mac). Can be executed on Windows with Visual Studio
 // Remember to set up scripts in package.json
 
 // npm audit - checks for vulnerabilities (that has been reported) in installed packages
