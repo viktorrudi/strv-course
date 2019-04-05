@@ -4,10 +4,16 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
+    "@strv/eslint-config-javascript": "^9.2.0",
+    "eslint": "^5.16.0",
     "koa": "^2.7.0",
+    "koa-body-parser": "^1.1.2",
     "koa-ejs": "^4.2.0",
+    "koa-json": "^2.0.2",
     "koa-router": "^7.4.0",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "pino": "^5.12.2",
+    "pino-pretty": "^2.6.0"
   },
   "devDependencies": {},
   "scripts": {

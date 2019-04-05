@@ -11,7 +11,8 @@
 
 //commitlint
 // semantic-release
-// need to learn more about how this works
+// To structure git commit messages 
+// learn more about how this works
 
 // "node ." runs index.js
 // "node --inspect-brk" can find in "chrome://inspect". Use breakpoints to read more info. Can se much mor info in the code by hovering

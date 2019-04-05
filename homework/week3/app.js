@@ -1,32 +1,54 @@
+'use strict'
+
+// Packages
 const Koa = require('koa')
 const KoaRouter = require('koa-router')
-const path = require('path')
-// const render = require('koa-ejs')
+const bodyParser = require('koa-body-parser')
+const json = require('koa-json')
+// Logging - setup
+const pino = require('pino')
 
-const app = new Koa();
-const router = new KoaRouter();
+const logger = pino({ prettyPrint: true })
 
-// ?
-// render(app, {
-//   root: path.join(__dirname, 'views'),
-//   layout: 'layout',
-//   viewExt: 'html',
-//   cache: false,
-//   debug: false
-// })
+// App and router setup
+const app = new Koa()
+const router = new KoaRouter()
+
+// Trigger middlewares
+app.use(json())
+app.use(bodyParser())
+app.use(router.routes())
+// app.use(router.routes()).use(router.allowedMethods())
 
 
-// Simple middleware creation
-app.use(async ctx => {
-  ctx.body = 'Hello world'
+// Api functionality (should be moved to other folder)
+router.get('/:id/:name', ctx => {
+  // Better logging in console
+  logger.info('test')
+
+  // Custom header
+  ctx.response.set('STRV-custom-header', 'Some test information')
+
+  // Get response
+  ctx.response.body = {
+    id: ctx.params.id,
+    name: ctx.params.name,
+  }
 })
 
-// Not working?
-router.get('/test', ctx => {
-  ctx.body = 'test here'
+// Server setup
+const PORT = 5000
+const server = app.listen(5000, () => {
+  logger.info(`Server started on port ${PORT}`)
 })
 
-// Router middleware
-app.use(router.routes()).use(router.allowedMethods())
-
-app.listen(5000, ()=> console.log('server started'))
+// Closing server (on 'Ctrl+C')
+process.on('SIGINT', () => {
+  server.close(() => {
+    logger.info('Server closing')
+  })
+  // process.exit() - AVOID THIS COMMAND. Instead throw error if server cant close in 10 seconds:
+  setTimeout(() => {
+    throw new Error('Timed out and disconnected')
+  }, 1000)
+})
