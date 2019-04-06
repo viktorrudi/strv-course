@@ -28,14 +28,10 @@ app.use(router.routes())
 
 // Get all articles
 router.get('/api/articles', ctx => {
-
-  // Loggin response  TO-DO: PUT INTO FILE
+  // Loggin response TO-DO: PUT INTO FILE
   logger.info(`
-    ${ctx.method} REQUEST @ 
-    ${ctx.protocol}://${ctx.host}${ctx.originalUrl} 
-    at ${moment().format()}
-  `)
-
+  ${ctx.method} REQUEST @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl} 
+  ${moment().format()}`)
   // Get response
   ctx.response.body = articles
 })
@@ -46,13 +42,10 @@ router.get('/api/articles/:id', ctx => {
   const found = articles.length > getID
 
   if (found) {
-    // Loggin response TO-DO: PUT INTO FILE
+  // Logging response TO-DO: PUT INTO FILE
     logger.info(`
-      ${ctx.method} REQUEST @ 
-      ${ctx.protocol}://${ctx.host}${ctx.originalUrl} 
-      at ${moment().format()}
-      ${found}
-    `)
+    ${ctx.method} REQUEST @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl} 
+    ${moment().format()}`)
 
     ctx.response.body = articles[getID]
   } else {
@@ -62,22 +55,54 @@ router.get('/api/articles/:id', ctx => {
 
 // Create member
 router.post('/api/articles', ctx => {
-
   const newArticle = {
+    id: articles.length + 1,
     title: ctx.request.body.title,
     text: ctx.request.body.text,
+    author: ctx.request.body.author,
   }
 
-  if (!newArticle.title || !newArticle.text) {
-    return ctx.throw(400, 'Title and text is required')
+  if (!newArticle.title || !newArticle.text || !newArticle.author) {
+    return ctx.throw(400, 'Title, author and text is required')
   }
 
   articles.push(newArticle)
 
+  // Logging response TO-DO: PUT INTO FILE
+  logger.info(`
+  ${ctx.method} REQUEST @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl} 
+  ${moment().format()}`)
   // Give a response with added article
   ctx.body = newArticle
-
 })
+
+// Update article
+router.put('/api/articles/:id', ctx => {
+  const getID = ctx.params.id - 1
+  const found = articles.length > getID
+
+  if (found) {
+  // Logging response TO-DO: PUT INTO FILE
+    logger.info(`
+    ${ctx.method} REQUEST @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl} 
+    ${moment().format()}`)
+
+    const updArticle = ctx.request.body
+    articles.forEach(article => {
+
+      if (article.id === ctx.params.id) {
+        article.title = updArticle.title ? updArticle.title : article.title
+        article.text = updArticle.text ? updArticle.text : article.text
+        article.author = updArticle.author ? updArticle.author : article.author
+
+        ctx.response.body = {
+          updated: articles[getID]
+        }
+      }
+    })
+  }
+})
+
 
 // ---------------------------------------------------------------------
 
