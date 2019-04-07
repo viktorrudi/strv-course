@@ -9,13 +9,14 @@ const pino = require('pino')
 const moment = require('moment')
 const uuid = require('uuid')
 
-// Logging - prettify
+// Pino prettifier
 const logger = pino({ prettyPrint: true })
 
-
-// App and router setup
+// App, router setup and import of "db" (global array)
 const app = new Koa()
-const router = new KoaRouter()
+const router = new KoaRouter({
+  prefix: '/api/articles',
+})
 const articles = require('./Articles')
 
 // Trigger middlewares
@@ -23,11 +24,12 @@ app.use(json())
 app.use(bodyParser())
 app.use(router.routes())
 
+
 // ---------------------------------------------------------------------
 
 
 // Get all articles
-router.get('/api/articles', ctx => {
+router.get('/', ctx => {
   // Loggin response TO-DO: PUT INTO FILE
   logger.info(`
   ${ctx.method} REQUEST @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl} 
@@ -37,7 +39,7 @@ router.get('/api/articles', ctx => {
 })
 
 // Get single article
-router.get('/api/articles/:id', ctx => {
+router.get('/:id', ctx => {
   const getID = ctx.params.id - 1
   const found = articles.length > getID
 
@@ -54,7 +56,7 @@ router.get('/api/articles/:id', ctx => {
 })
 
 // Create article
-router.post('/api/articles', ctx => {
+router.post('/', ctx => {
   const newArticle = {
     id: uuid.v4(),
     title: ctx.request.body.title,
@@ -79,7 +81,7 @@ router.post('/api/articles', ctx => {
 })
 
 // Update article
-router.patch('/api/articles/:id', ctx => {
+router.patch('/:id', ctx => {
   const getID = ctx.params.id - 1
   const found = articles.length > getID
 
@@ -112,13 +114,13 @@ router.patch('/api/articles/:id', ctx => {
   }
 })
 
-router.delete('/api/articles/:id', ctx => {
+router.delete('/:id', ctx => {
   const getID = ctx.params.id - 1
   const found = articles.length > getID
 
   if (found) {
     ctx.body = {
-      'removed article': articles[getID]
+      'removed article': articles[getID],
     }
     articles.splice(getID, 1)
   } else {
@@ -128,6 +130,7 @@ router.delete('/api/articles/:id', ctx => {
 
 
 // ---------------------------------------------------------------------
+
 
 // Server setup
 const PORT = 5000
