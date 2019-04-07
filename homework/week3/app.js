@@ -80,7 +80,7 @@ router.post('/', ctx => {
   ctx.body = newArticle
 })
 
-// Update article
+// Update (patch) article
 router.patch('/:id', ctx => {
   const getID = ctx.params.id - 1
   const found = articles.length > getID
@@ -114,6 +114,7 @@ router.patch('/:id', ctx => {
   }
 })
 
+// Delete article
 router.delete('/:id', ctx => {
   const getID = ctx.params.id - 1
   const found = articles.length > getID
