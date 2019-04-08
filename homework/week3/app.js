@@ -135,8 +135,8 @@ router.delete('/:id', ctx => {
 
 
 // Server setup
-const PORT = 5000
-const server = app.listen(5000, () => {
+const PORT = process.env.PORT || 5000
+const server = app.listen(PORT, () => {
   logger.info(`Server started on port ${PORT}`)
 })
 
