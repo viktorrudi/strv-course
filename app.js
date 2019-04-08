@@ -32,7 +32,7 @@ app.use(router.routes())
 router.get('/', ctx => {
   // Loggin response TO-DO: PUT INTO FILE
   logger.info(`
-  ${ctx.method} REQUEST @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl} 
+  ${ctx.method} REQUESTTTTTT @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl} 
   ${moment().format()}`)
   // Get response
   ctx.response.body = articles
