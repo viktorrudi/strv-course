@@ -10,7 +10,9 @@ const moment = require('moment')
 const uuid = require('uuid')
 
 // Pino prettifier
-const logger = pino({ prettyPrint: true })
+const logger = pino({
+  prettyPrint: true,
+})
 
 // App, router setup and import of "db" (global array)
 const app = new Koa()
@@ -23,7 +25,6 @@ const articles = require('./Articles')
 app.use(json())
 app.use(bodyParser())
 app.use(router.routes())
-
 
 // ---------------------------------------------------------------------
 
@@ -44,7 +45,7 @@ router.get('/:id', ctx => {
   const found = articles.length > getID
 
   if (found) {
-  // Logging response TO-DO: PUT INTO FILE
+    // Logging response TO-DO: PUT INTO FILE
     logger.info(`
     ${ctx.method} REQUEST @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl} 
     ${moment().format()}`)
@@ -89,7 +90,7 @@ router.patch('/:id', ctx => {
   ctx.response.body = articles
 
   if (found) {
-  // Logging response TO-DO: PUT INTO FILE
+    // Logging response TO-DO: PUT INTO FILE
     logger.info(`
     ${ctx.method} REQUEST @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl} 
     ${moment().format()}`)
@@ -146,5 +147,5 @@ process.on('SIGINT', () => {
   })
   setTimeout(() => {
     throw new Error('Timed out and disconnected')
-  }, 5000)
+  }, 5000).unref()
 })
