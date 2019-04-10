@@ -8,6 +8,7 @@ const json = require('koa-json')
 const pino = require('pino')
 const moment = require('moment')
 const uuid = require('uuid')
+const config = require('./config')
 
 // Pino prettifier
 const logger = pino({
@@ -33,7 +34,7 @@ app.use(router.routes())
 router.get('/', ctx => {
   // Loggin response TO-DO: PUT INTO FILE
   logger.info(`
-  ${ctx.method} REQUEST @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl} 
+  ${ctx.method} REQUEST @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl}
   ${moment().format()}`)
   // Get response
   ctx.response.body = articles
@@ -47,7 +48,7 @@ router.get('/:id', ctx => {
   if (found) {
     // Logging response TO-DO: PUT INTO FILE
     logger.info(`
-    ${ctx.method} REQUEST @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl} 
+    ${ctx.method} REQUEST @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl}
     ${moment().format()}`)
 
     ctx.response.body = articles[getID]
@@ -66,7 +67,7 @@ router.post('/', ctx => {
   }
 
   if (!newArticle.title || !newArticle.text || !newArticle.author) {
-    return ctx.throw(400, 'Title, author and text is required')
+    ctx.throw(400, 'Title, author and text is required')
   }
 
   // Insert new article into all articles
@@ -74,7 +75,7 @@ router.post('/', ctx => {
 
   // Logging response TO-DO: PUT INTO FILE
   logger.info(`
-  ${ctx.method} REQUEST @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl} 
+  ${ctx.method} REQUEST @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl}
   ${moment().format()}`)
 
   // Give a response with added article
@@ -92,7 +93,7 @@ router.patch('/:id', ctx => {
   if (found) {
     // Logging response TO-DO: PUT INTO FILE
     logger.info(`
-    ${ctx.method} REQUEST @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl} 
+    ${ctx.method} REQUEST @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl}
     ${moment().format()}`)
 
     const updArticle = ctx.request.body
@@ -135,7 +136,7 @@ router.delete('/:id', ctx => {
 
 
 // Server setup
-const PORT = process.env.PORT || 5000
+const PORT = config().server.port || 5000
 const server = app.listen(PORT, () => {
   logger.info(`Server started on port ${PORT}`)
 })
