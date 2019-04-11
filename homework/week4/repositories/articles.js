@@ -1,6 +1,5 @@
 'use strict'
 
-const R = require('ramda')
 const uuid = require('uuid')
 const articles = require('../database/articles.json')
 

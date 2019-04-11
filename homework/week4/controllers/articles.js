@@ -16,7 +16,7 @@ async function create(ctx) {
   }
 
   validate(schema.article, newArticle)
-
+  // If validation is successfull, send the whole body
   ctx.body = await operations.create(ctx.request.body)
 }
 

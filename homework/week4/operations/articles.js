@@ -4,7 +4,7 @@
 const articleRepo = require('../repositories/articles')
 
 function getAllCollect() {
-  // Returns all found articles collected from database (array)
+  // Returns all found articles collected from database (array) to be used in operations
   return articleRepo.findAll()
 }
 
