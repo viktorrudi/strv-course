@@ -1,0 +1,31 @@
+{
+  "name": "week4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "@strv/eslint-config-javascript": "^9.2.0",
+    "eslint": "^5.16.0",
+    "jsonschema": "^1.2.4",
+    "koa": "^2.7.0",
+    "koa-body-parser": "^1.1.2",
+    "koa-ejs": "^4.2.0",
+    "koa-json": "^2.0.2",
+    "koa-router": "^7.4.0",
+    "moment": "^2.24.0",
+    "nodemon": "^1.18.10",
+    "pino": "^5.12.2",
+    "pino-pretty": "^2.6.0",
+    "ramda": "^0.26.1",
+    "supertest": "^4.0.2",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "nodemon app.js",
+    "test": "jest --watchAll"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
