@@ -2,27 +2,27 @@
 
 const articleID = {
   type: 'Object',
-  required: ['id'],
-  additionalProperties: 'false',
+  required: true,
   properties: {
     id: {
       type: 'string',
-      min: 1,
-      max: 10000,
+      required: true,
     },
   },
+  additionalProperties: false,
 }
 
 const article = {
   type: 'Object',
-  required: ['title', 'text'],
-  additionalProperties: 'false',
+  required: true,
   properties: {
     title: {
       type: 'string',
+      required: true,
     },
     text: {
       type: 'string',
+      required: true,
     },
   },
 }

@@ -6,6 +6,7 @@ const bodyParser = require('koa-body-parser')
 // const json = require('json')
 const routes = require('./routes/index')
 const config = require('./config/default')
+const log = require('./utils/logger')
 
 // App setup
 const app = new Koa()
@@ -17,5 +18,11 @@ app.use(routes)
 const PORT = config().server.port
 
 const server = app.listen(PORT, () => {
-  console.log(`Server online on ${PORT}`)
+  log.info(`Server online on ${PORT}`)
+})
+
+process.on('SIGINT', () => {
+  server.close(() => {
+    log.info('Shutting down')
+  })
 })

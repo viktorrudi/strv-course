@@ -1,3 +1,4 @@
+/* eslint-disable no-warning-comments */
 /* eslint-disable node/no-unsupported-features/es-syntax */
 'use strict'
 
@@ -15,6 +16,7 @@ async function create(ctx) {
     text: ctx.request.body.text,
   }
 
+  // Todo: fix validation. Doesn't do anything now
   validate(schema.article, newArticle)
   // If validation is successfull, send the whole body
   ctx.body = await operations.create(ctx.request.body)
