@@ -3,7 +3,6 @@
 'use strict'
 
 const jsonschema = require('jsonschema')
-const log = require('../utils/logger')
 const errors = require('../utils/errors')
 
 function validate(schema, input) {
@@ -13,8 +12,6 @@ function validate(schema, input) {
 
   if (validationErrors.length > 0) {
     throw new errors.ValidationError()
-  } else {
-    log.info('Validation ok')
   }
 }
 

@@ -1,6 +1,7 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
 'use strict'
 
+// Triggered in routes
 async function handleErrors(ctx, next) {
   try {
     // If no errors, continue to next middleware
