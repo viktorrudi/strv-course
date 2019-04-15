@@ -5,15 +5,9 @@
 const log = require('../utils/logger')
 
 async function logSuccess(ctx, next) {
-  try {
-    log.info(`${ctx.method} REQUEST @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl}
+  log.info(`${ctx.method} REQUEST @ ${ctx.protocol}://${ctx.host}${ctx.originalUrl}
     ${ctx.body}`)
-    return await next()
-  } catch (err) {
-    // Todo: Update with a 500 error (need to make in utils/errors)
-    console.log('I\'m here but i shouldn\'t why?')
-    throw new Error('what')
-  }
+  return await next()
 }
 
 module.exports = {
