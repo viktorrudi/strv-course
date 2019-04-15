@@ -13,7 +13,7 @@ async function handleErrors(ctx, next) {
       message: err.message,
       example: err.example,
     }
-    // [QUESTION] Is this return just to make ESLint to shut up?
+    // [QUESTION] Is this return just to make ESLint shut up?
     return true
   }
 }

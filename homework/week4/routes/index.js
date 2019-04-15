@@ -13,7 +13,11 @@ router.use(handleErrors)
 router.use(logSuccess)
 
 router.get('/', articles.getAll)
+router.get('/:id', articles.getById)
 router.post('/', articles.create)
+router.put('/:id', articles.put)
+router.patch('/:id', articles.patch)
+router.delete('/:id', articles.deleteArticle)
 
 // Sent to app.js
 module.exports = router.routes()
