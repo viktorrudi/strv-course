@@ -4,11 +4,12 @@
 const log = require('../utils/logger')
 
 class AppError extends Error {
-  constructor(message, example, status) {
+  constructor(properties) {
     super()
-    this.message = message
-    this.example = example
-    this.status = status
+    this.message = properties.message
+    this.example = properties.example
+    this.status = properties.status
+    // [QUESTION] When is this called?
     log.error({
       error: {
         message: this.message,
@@ -22,24 +23,39 @@ class AppError extends Error {
 // Then used in middleware/errors.js
 class ValidationError extends AppError {
   constructor(customMessage) {
-    // [QUESTION] Why add the type (BAD_REQUEST)
-    const defaultMessage = 'Invalid or missing data'
-    const example = { title: 'string', text: 'string' }
-
-    super(customMessage || defaultMessage, example, 400)
+    const properties = {
+      message: customMessage || 'Invalid or missing data!',
+      example: { title: 'string', text: 'string' },
+      status: 400,
+    }
+    super(properties)
   }
 }
 
 class NotFoundError extends AppError {
   constructor(customMessage) {
-    const defaultMessage = 'ID not found'
-    const example = { title: 'string', text: 'string' }
+    const properties = {
+      message: customMessage || 'ID not found',
+      example: { title: 'string', text: 'string' },
+      status: 404,
+    }
+    super(properties)
+  }
+}
 
-    super(customMessage || defaultMessage, example, 404)
+class InternalServerError extends AppError {
+  constructor(customMessage) {
+    const properties = {
+      message: customMessage || 'Something went horribly wrong on our side',
+      status: 500,
+    }
+    super(properties)
   }
 }
 
 module.exports = {
+  AppError,
   ValidationError,
   NotFoundError,
+  InternalServerError,
 }

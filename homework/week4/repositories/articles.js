@@ -35,16 +35,6 @@ function put(input) {
     }
   }
 
-  // [QUESTION] Why doesn't this forEach method work?
-  // articles.forEach(article => {
-  //   if (article.id === idRequest) {
-  //     article.id = idRequest
-  //     article.title = input.title
-  //     article.text = input.text
-  //   }
-  //   return article
-  // })
-
   // If no match was found, return false for error handling
   return false
 }
@@ -53,7 +43,6 @@ function put(input) {
 function patch(input) {
   const idRequest = parseInt(input.id)
 
-  // [QUESTION] Same question here
   for (let i = 0; i < articles.length; i++) {
     if (articles[i].id === idRequest) {
       articles[i].title = input.title ? input.title : articles[i].title
@@ -73,6 +62,7 @@ function deleteArticle(id) {
 
   // Update database with removed object
   articles.splice(index, 1)
+  // Send message back to client
   return {
     message: 'Object successfully deleted.',
     articles,
