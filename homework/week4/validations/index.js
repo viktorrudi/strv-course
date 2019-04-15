@@ -4,6 +4,7 @@
 
 const jsonschema = require('jsonschema')
 const errors = require('../utils/errors')
+const log = require('../utils/logger')
 
 function validate(schema, input) {
   // [Question] How does the Validator constructor/class work? Not necessary to dig into because it's a third party package.
@@ -11,8 +12,10 @@ function validate(schema, input) {
   const validationErrors = validator.validate(input, schema).errors
 
   if (validationErrors.length > 0) {
+    log.error(validationErrors)
     throw new errors.ValidationError()
   }
+  console.log('validation passed')
 }
 
 module.exports = {

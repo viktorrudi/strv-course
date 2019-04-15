@@ -5,8 +5,10 @@ const articleID = {
   required: true,
   properties: {
     id: {
-      type: 'string',
+      type: 'integer',
       required: true,
+      minimum: 0,
+      maximum: 10000,
     },
   },
   additionalProperties: false,
@@ -27,7 +29,23 @@ const article = {
   },
 }
 
+const aritcleOptional = {
+  type: 'Object',
+  required: false,
+  properties: {
+    title: {
+      type: 'string',
+      required: false,
+    },
+    text: {
+      type: 'string',
+      required: false,
+    },
+  },
+}
+
 module.exports = {
   articleID,
   article,
+  aritcleOptional,
 }
