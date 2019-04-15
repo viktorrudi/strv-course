@@ -11,6 +11,7 @@ async function logSuccess(ctx, next) {
     return await next()
   } catch (err) {
     // Todo: Update with a 500 error (need to make in utils/errors)
+    console.log('I\'m here but i shouldn\'t why?')
     throw new Error('what')
   }
 }
