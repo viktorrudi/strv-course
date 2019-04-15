@@ -12,6 +12,7 @@ async function getAll(ctx) {
 
 async function getById(ctx) {
   const id = await parseInt(ctx.params.id)
+  // TODO: validate id param input
   ctx.body = await operations.getById(id)
 }
 
@@ -21,9 +22,9 @@ async function create(ctx) {
     text: ctx.request.body.text,
   }
 
-  // Todo: fix validation. Doesn't do anything now
+  // TODO: fix validation. Doesn't do anything now
   validate(schema.article, newArticle)
-  // If validation is successfull, send the whole body
+  // If validation is successful, send the whole body
   ctx.body = await operations.createFrom(ctx.request.body)
 }
 
@@ -33,6 +34,7 @@ async function put(ctx) {
     title: ctx.request.body.title,
     text: ctx.request.body.text,
   }
+  // TODO: Validate body input AND param input
   ctx.response.body = await operations.put(updArticle)
 }
 
@@ -42,11 +44,13 @@ async function patch(ctx) {
     title: ctx.request.body.title,
     text: ctx.request.body.text,
   }
+  // TODO: Validate body input AND param input
   ctx.response.body = await operations.patch(patchArticle)
 }
 
 async function deleteArticle(ctx) {
   const id = await parseInt(ctx.params.id)
+  // TODO: Validate param input
   ctx.body = await operations.deleteArticle(id)
 }
 

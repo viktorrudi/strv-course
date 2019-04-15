@@ -64,7 +64,7 @@ function deleteArticle(id) {
   articles.splice(index, 1)
   // Send message back to client
   return {
-    message: 'Object successfully deleted.',
+    message: 'Article successfully deleted.',
     articles,
   }
 }

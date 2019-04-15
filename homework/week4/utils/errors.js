@@ -9,12 +9,10 @@ class AppError extends Error {
     this.message = properties.message
     this.example = properties.example
     this.status = properties.status
-    // [QUESTION] When is this called?
+    this.type = properties.type
+    // Logging for the terminal:
     log.error({
-      error: {
-        message: this.message,
-        status: this.status,
-      },
+      error: { status: this.status, type: this.type, message: this.message },
     })
   }
 }
@@ -24,9 +22,10 @@ class AppError extends Error {
 class ValidationError extends AppError {
   constructor(customMessage) {
     const properties = {
+      status: 400,
+      type: 'BAD_REQUEST',
       message: customMessage || 'Invalid or missing data!',
       example: { title: 'string', text: 'string' },
-      status: 400,
     }
     super(properties)
   }
@@ -35,9 +34,10 @@ class ValidationError extends AppError {
 class NotFoundError extends AppError {
   constructor(customMessage) {
     const properties = {
+      status: 404,
+      type: 'NOT_FOUND',
       message: customMessage || 'ID not found',
       example: { title: 'string', text: 'string' },
-      status: 404,
     }
     super(properties)
   }
@@ -46,8 +46,9 @@ class NotFoundError extends AppError {
 class InternalServerError extends AppError {
   constructor(customMessage) {
     const properties = {
-      message: customMessage || 'Something went horribly wrong on our side',
       status: 500,
+      type: 'INTERNAL_SERVER',
+      message: customMessage || 'Something went horribly wrong on our side',
     }
     super(properties)
   }
