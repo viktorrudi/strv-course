@@ -5,8 +5,10 @@
   "main": "app.js",
   "dependencies": {
     "@strv/eslint-config-javascript": "^9.2.0",
+    "bcrypt": "^3.0.6",
     "eslint": "^5.16.0",
     "jsonschema": "^1.2.4",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.7.0",
     "koa-body": "^4.1.0",
     "koa-body-parser": "^1.1.2",

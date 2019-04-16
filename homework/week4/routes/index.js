@@ -1,7 +1,9 @@
+/* eslint-disable no-warning-comments */
 'use strict'
 
 const Router = require('koa-router')
 const articles = require('../controllers/articles')
+const users = require('../controllers/users')
 const { handleErrors } = require('../middelware/errors')
 const { logSuccess } = require('../middelware/logging')
 
@@ -12,6 +14,14 @@ router.use(handleErrors)
 // Logs on CRUD operations
 router.use(logSuccess)
 
+// TODO: Create better routes for users
+
+// Users
+router.get('/users', users.allUsers)
+router.post('/users', users.login)
+router.post('/register', users.register)
+
+// Articles
 router.get('/', articles.getAll)
 router.get('/:id', articles.getById)
 router.post('/', articles.create)

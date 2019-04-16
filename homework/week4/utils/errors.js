@@ -54,9 +54,23 @@ class InternalServerError extends AppError {
   }
 }
 
+// TODO: Create conflict error
+
+class AuthorizationError extends AppError {
+  constructor(customMessage) {
+    const properties = {
+      status: 401,
+      type: 'UNAUTHORIZED',
+      message: customMessage || 'Auth error :(',
+    }
+    super(properties)
+  }
+}
+
 module.exports = {
   AppError,
   ValidationError,
   NotFoundError,
   InternalServerError,
+  AuthorizationError,
 }

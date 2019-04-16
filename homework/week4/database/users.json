@@ -2,16 +2,16 @@
   {
     "id": 1,
     "email": "name1@email.com",
-    "password": "Pass1"
+    "password": "12345678"
   },
   {
     "id": 2,
     "email": "name2@email.com",
-    "password": "Pass2"
+    "password": "12345678"
   },
   {
     "id": 3,
     "email": "name3@email.com",
-    "password": "Pass3"
+    "password": "12345678"
   }
 ]
