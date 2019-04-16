@@ -1,8 +1,6 @@
 /* eslint-disable no-warning-comments */
 'use strict'
 
-// TODO: Set up jwtToken schema
-
 const articleID = {
   type: 'Object',
   required: true,

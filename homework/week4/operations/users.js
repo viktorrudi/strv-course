@@ -38,7 +38,7 @@ function register(input) {
 
   const alreadyExists = usersRepo.findByEmail(input.email)
   if (alreadyExists) {
-    // TODO: Update with a better error. Conflict error
+    // TODO: Update with a better error. Conflict error (utils)
     throw new errors.ValidationError('Already exists')
   }
 

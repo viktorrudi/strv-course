@@ -1,4 +1,7 @@
+/* eslint-disable no-warning-comments */
 'use strict'
+
+// TODO: Set up jwtToken schema
 
 const userEmailLookup = {
   type: 'Object',
