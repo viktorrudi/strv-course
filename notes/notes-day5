@@ -1,0 +1,17 @@
+npm i
+  pg (postgres)
+  knex
+    knexfile.js (configuration for database)
+    seeds - placeholder data basically (for development)
+  objection
+    "addon" for knex
+    .toSql() to see what query is being used
+
+add db connection details to config.
+
+Docker
+ docker-compose.yaml
+  defining what image should be used in docker container
+  run with docker-rompose up -d
+
+insomnia: postman alternative
