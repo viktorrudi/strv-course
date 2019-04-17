@@ -26,14 +26,15 @@ function getById(id) {
   return user
 }
 
-function register(input) {
-  log.info('Registering starting. This is what was inserted', input)
+async function register(input) {
+  log.info('Registering starting. This is what was inserted:', input)
 
-  // TODO: Make crypto a promise so I can await all crypto FNs
+  // Create hashed password and inserting it into the new user object
+  const hashedPassword = await crypto.hashPassword(input.password)
   const user = {
     name: input.name,
     email: input.email.toLowerCase(),
-    password: crypto.hashPassword(input.password),
+    password: hashedPassword,
   }
 
   const alreadyExists = usersRepo.findByEmail(input.email)
@@ -42,10 +43,12 @@ function register(input) {
     throw new errors.ValidationError('Already exists')
   }
 
+  // Creating user and then appending accesstoken to it
   const createdUser = usersRepo.create(user)
-  createdUser.accessToken = crypto.generateAccessToken(createdUser.id)
-  log.info('Registering successful of', createdUser.email)
+  createdUser.accessToken = await crypto.generateAccessToken(createdUser.id)
 
+  // Registration end
+  log.info(`New registration. Name: ${createdUser.name}, E-mail: ${createdUser.email}`)
   return createdUser
 }
 

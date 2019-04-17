@@ -6,6 +6,7 @@
   "dependencies": {
     "@strv/eslint-config-javascript": "^9.2.0",
     "bcrypt": "^3.0.6",
+    "dotenv": "^7.0.0",
     "eslint": "^5.16.0",
     "jsonschema": "^1.2.4",
     "jsonwebtoken": "^8.5.1",
@@ -22,6 +23,9 @@
     "ramda": "^0.26.1",
     "supertest": "^4.0.2",
     "uuid": "^3.3.2"
+  },
+  "engines": {
+    "node": ">=10.0.0"
   },
   "devDependencies": {},
   "scripts": {

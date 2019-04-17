@@ -15,7 +15,7 @@ const app = new Koa()
 app.use(bodyParser())
 app.use(routes)
 
-const PORT = config().server.port
+const PORT = config.server.port
 const server = app.listen(PORT, () => {
   log.info(`Server online on ${PORT}`)
 })

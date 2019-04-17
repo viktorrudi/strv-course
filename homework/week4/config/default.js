@@ -1,7 +1,6 @@
 'use strict'
 
-module.exports = env => ({
-  env,
+module.exports = {
   server: {
     port: process.env.PORT || 3000,
   },
@@ -18,5 +17,5 @@ module.exports = env => ({
       issuer: 'Viktor',
     },
   },
-})
+}
 

@@ -19,15 +19,17 @@ async function login(ctx) {
   ctx.body = await operations.login(input)
 }
 
-function register(ctx) {
+async function register(ctx) {
   const input = {
     name: ctx.request.body.name,
     email: ctx.request.body.email,
     password: ctx.request.body.password,
   }
   validate(schemas.userSignup, input)
+
   // If validation succesful, run functions to create user and send it back
-  ctx.body = operations.register(input)
+  const newUser = await operations.register(input)
+  ctx.body = newUser
 }
 
 module.exports = {
