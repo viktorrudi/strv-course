@@ -54,7 +54,16 @@ class InternalServerError extends AppError {
   }
 }
 
-// TODO: Create conflict error
+class ConflictError extends AppError {
+  constructor(customMessage) {
+    const properties = {
+      status: 409,
+      type: 'CONFLICT',
+      message: customMessage || 'Conflict error :(',
+    }
+    super(properties)
+  }
+}
 
 class AuthorizationError extends AppError {
   constructor(customMessage) {
@@ -73,4 +82,5 @@ module.exports = {
   NotFoundError,
   InternalServerError,
   AuthorizationError,
+  ConflictError,
 }

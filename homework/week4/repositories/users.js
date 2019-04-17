@@ -21,7 +21,7 @@ function create(user) {
 }
 
 // Update - PUT
-// TODO: Needs password fixing
+// TODO: Needs fixing
 function put(input) {
   const idRequest = parseInt(input.id)
 
@@ -39,7 +39,7 @@ function put(input) {
 }
 
 // UPDATE - PATCH
-// TODO: Needs password fixing
+// TODO: Needs fixing
 function patch(input) {
   const idRequest = parseInt(input.id)
 

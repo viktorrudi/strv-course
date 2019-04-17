@@ -37,10 +37,10 @@ async function register(input) {
     password: hashedPassword,
   }
 
+  // Check if users email is already in database
   const alreadyExists = usersRepo.findByEmail(input.email)
   if (alreadyExists) {
-    // TODO: Update with a better error. Conflict error (utils)
-    throw new errors.ValidationError('Already exists')
+    throw new errors.ConflictError('User account already exists')
   }
 
   // Creating user and then appending accesstoken to it

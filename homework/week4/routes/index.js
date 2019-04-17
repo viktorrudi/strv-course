@@ -18,7 +18,7 @@ router.use(logSuccess)
 
 // Users
 router.get('/users', users.allUsers)
-router.post('/users', users.login)
+router.post('/login', users.login)
 router.post('/register', users.register)
 
 // Articles
