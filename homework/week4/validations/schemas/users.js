@@ -1,7 +1,6 @@
 /* eslint-disable no-warning-comments */
 'use strict'
 
-// TODO: Set up jwtToken schema
 const jwtToken = {
   type: 'Object',
   required: true,

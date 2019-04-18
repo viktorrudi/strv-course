@@ -13,8 +13,6 @@ router.use(handleErrors)
 // Logs on CRUD operations
 router.use(logSuccess)
 
-// TODO: Create better routes for users. Different router with prefix for users maybe?
-
 // Users
 router.get('/api/users', users.allUsers)
 router.post('/api/login', users.login)
