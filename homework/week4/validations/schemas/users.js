@@ -2,6 +2,16 @@
 'use strict'
 
 // TODO: Set up jwtToken schema
+const jwtToken = {
+  type: 'Object',
+  required: true,
+  properties: {
+    jwtToken: {
+      type: 'string',
+      required: true,
+    },
+  },
+}
 
 const userEmailLookup = {
   type: 'Object',
@@ -61,6 +71,7 @@ const userSignup = {
 }
 
 module.exports = {
+  jwtToken,
   userEmailLookup,
   userLogin,
   userSignup,

@@ -6,6 +6,7 @@ const articles = require('../controllers/articles')
 const users = require('../controllers/users')
 const { handleErrors } = require('../middelware/errors')
 const { logSuccess } = require('../middelware/logging')
+const { auth } = require('../middelware/auth')
 
 const router = new Router({
   prefix: '/api/articles',
@@ -22,7 +23,7 @@ router.post('/login', users.login)
 router.post('/register', users.register)
 
 // Articles
-router.get('/', articles.getAll)
+router.get('/', auth, articles.getAll)
 router.get('/:id', articles.getById)
 router.post('/', articles.create)
 router.put('/:id', articles.put)

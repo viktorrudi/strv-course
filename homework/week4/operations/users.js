@@ -7,9 +7,45 @@ const usersRepo = require('../repositories/users')
 const log = require('../utils/logger')
 const crypto = require('../utils/crypto')
 
-function verityToken(input) {
-  // TODO: MIDDELWARE: Veritication middleware
-  // TODO: UTIL: Create crypto util to use for veritication
+async function verityTokenPayload(input) {
+  log.info('verityTokenPayload starting')
+
+
+  // testing
+  // log.error(input)
+
+
+  const jwtPayload = await crypto.verifyAccessToken(input.jwtToken)
+  const now = Date().now
+
+  if (!jwtPayload) {
+    throw new errors.AuthorizationError('AuthErr: Missing jwt payload')
+  }
+
+  // Testing
+  log.info('jwt Payload:', jwtPayload)
+
+
+  if (!jwtPayload.exp) {
+    throw new errors.AuthorizationError('AuthErr: missing jwt payload exp')
+  }
+
+  if (now >= jwtPayload.expiration * 1000) {
+    throw new errors.AuthorizationError('AuthErr: now is less than payload expiration * 1000')
+  }
+
+  const userID = parseInt(jwtPayload.userID)
+  const user = await usersRepo.findByEmail(userID)
+
+  if (!user) {
+    throw new errors.AuthorizationError('Authorization failed (couldn\'t match user)')
+  }
+
+  log.info('verifyTokenPayload ending')
+  return {
+    user,
+    loginTimeout: jwtPayload.expiration * 1000,
+  }
 }
 
 function allUsers() {
@@ -92,7 +128,7 @@ function deleteUser(id) {
 }
 
 module.exports = {
-  verityToken,
+  verityTokenPayload,
   allUsers,
   getById,
   register,
