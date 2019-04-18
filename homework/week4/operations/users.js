@@ -7,41 +7,26 @@ const usersRepo = require('../repositories/users')
 const log = require('../utils/logger')
 const crypto = require('../utils/crypto')
 
+// Verifies if token in header matches
 async function verityTokenPayload(input) {
-  log.info('verityTokenPayload starting')
-
-
-  // testing
-  // log.error(input)
-
-
   const jwtPayload = await crypto.verifyAccessToken(input.jwtToken)
   const now = Date().now
 
   if (!jwtPayload) {
-    throw new errors.AuthorizationError('AuthErr: Missing jwt payload')
-  }
-
-  // Testing
-  log.info('jwt Payload:', jwtPayload)
-
-
-  if (!jwtPayload.exp) {
-    throw new errors.AuthorizationError('AuthErr: missing jwt payload exp')
+    throw new errors.AuthorizationError('AuthErr: Missing jwtPayload')
   }
 
   if (now >= jwtPayload.expiration * 1000) {
     throw new errors.AuthorizationError('AuthErr: now is less than payload expiration * 1000')
   }
 
-  const userID = parseInt(jwtPayload.userID)
-  const user = await usersRepo.findByEmail(userID)
+  const userID = await parseInt(jwtPayload.userID)
+  const user = await usersRepo.findById(userID)
 
   if (!user) {
     throw new errors.AuthorizationError('Authorization failed (couldn\'t match user)')
   }
 
-  log.info('verifyTokenPayload ending')
   return {
     user,
     loginTimeout: jwtPayload.expiration * 1000,
@@ -96,10 +81,6 @@ async function login(input) {
     log.error('login auth error: ', input)
     throw new errors.AuthorizationError('Incorrect username or password')
   }
-
-  // Testing
-  log.info('database:', user.password)
-  log.info('POSTed:', input.password)
 
   const verified = await crypto.comparePasswords(input.password, user.password)
   if (!verified) {

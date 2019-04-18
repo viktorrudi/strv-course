@@ -11,20 +11,17 @@ async function auth(ctx, next) {
   if (!authToken) {
     throw new error.AuthorizationError('Authorization failed. Check auth token')
   }
+  // testing
 
   const input = { jwtToken: authToken }
-
   validate(schemas.jwtToken, input)
 
-  // verifyTokenPayload function
   const data = await operations.verityTokenPayload(input)
-
-  // console.log('11111111111', data)
-
 
   if (ctx.response && data.loginTimeout) {
     ctx.set('Login-timeout', data.loginTimeout)
   }
+
 
 
   ctx.state.user = data.user

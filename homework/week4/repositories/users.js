@@ -13,6 +13,11 @@ function findByEmail(email) {
   return users.find(user => user.email === email)
 }
 
+// Read - GET /id
+function findById(id) {
+  return users.find(user => user.id === id)
+}
+
 // Create user - POST
 function create(user) {
   user.id = users.length + 1
@@ -77,4 +82,5 @@ module.exports = {
   put,
   patch,
   deleteUser,
+  findById,
 }
