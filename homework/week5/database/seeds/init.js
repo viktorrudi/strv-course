@@ -14,8 +14,7 @@ exports.seed = function(knex, Promise) {
 // How would this be writte in async/await syntax? Like this?
 //
 // async function seed(knex, Promise) {
-//   const articles = await knex('articles')
-//   articles.del()
+//   await knex('articles').del()
 //   return await articles.insert(articlesData)
 // }
 //
