@@ -3,10 +3,10 @@
 const path = require('path')
 const config = require('../config/default')
 
+require('dotenv').config()
+
 module.exports = {
   client: 'pg',
-  user: 'docker',
-  password: 'docker',
   connection: config.db.uri,
   // A pool for how many connections to the DB that are accepted
   pool: {

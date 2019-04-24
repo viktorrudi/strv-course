@@ -3,9 +3,7 @@
 
 const Koa = require('koa')
 const bodyParser = require('koa-body')
-// const json = require('json')
 const routes = require('./routes/index')
-const config = require('./config/default')
 const log = require('./utils/logger')
 const database = require('./database')
 
@@ -25,6 +23,7 @@ app.start = async () => {
   log.info('Starting app')
 
   await database.start()
+  // Advanced. Removed (see above)
   // services.server = await new Promise((res, reject) => {
   //   const listen = app.listen(config.server.port, err => err ? reject(err) : res(listen))
   // })
@@ -42,7 +41,7 @@ if (require.main === module) {
 //   log.info(`Server online on ${PORT}`)
 // })
 
-process.once('SIGINT', () => app.stop(() => log.info('Shutting down')))
-process.once('SIGTERM', () => app.stop(() => log.info('Shutting down')))
+process.once('SIGINT', () => app.stop())
+process.once('SIGTERM', () => app.stop())
 
 module.exports = app

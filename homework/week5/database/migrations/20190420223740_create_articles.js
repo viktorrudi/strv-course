@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable import/group-exports */
 'use strict'
 
