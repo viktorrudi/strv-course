@@ -5,8 +5,8 @@ const config = require('../config/default')
 
 module.exports = {
   client: 'pg',
-  // user: 'postgres',
-  // password: 'postgres',
+  user: 'docker',
+  password: 'docker',
   connection: config.db.uri,
   // [QUESTION] What does this do?
   pool: {
