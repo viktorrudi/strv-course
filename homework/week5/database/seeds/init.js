@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 'use strict'
 
 const articlesData = require('./articles.json')

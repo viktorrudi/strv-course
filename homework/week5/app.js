@@ -9,10 +9,10 @@ const config = require('./config/default')
 const log = require('./utils/logger')
 const database = require('./database')
 
-// [QUESTION] What is this for?
-const services = {
-  server: null,
-}
+// Advanced. To be removed. Commented where its used below.
+// const services = {
+//   server: null,
+// }
 
 // App setup
 const app = new Koa()
@@ -25,9 +25,9 @@ app.start = async () => {
   log.info('Starting app')
 
   await database.start()
-  services.server = await new Promise((res, reject) => {
-    const listen = app.listen(config.server.port, err => err ? reject(err) : res(listen))
-  })
+  // services.server = await new Promise((res, reject) => {
+  //   const listen = app.listen(config.server.port, err => err ? reject(err) : res(listen))
+  // })
 }
 
 // [QUESTION] What does 'require' and 'module' do here?

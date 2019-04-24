@@ -8,7 +8,7 @@ module.exports = {
   user: 'docker',
   password: 'docker',
   connection: config.db.uri,
-  // [QUESTION] What does this do?
+  // A pool for how many connections to the DB that are accepted
   pool: {
     min: 1,
     max: 10,

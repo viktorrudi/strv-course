@@ -5,7 +5,7 @@ const Knex = require('knex')
 const knexConfig = require('../config/knexfile')
 
 const start = async () => {
-  // [QUESTION] Why are we not creating instance of Knex (new KW)
+  // Specific implementation by this package (instead of using new kw)
   const knex = Knex(knexConfig)
 
   try {
