@@ -1,0 +1,47 @@
+Testing, CI, CD, deployment
+
+create two databases. one for tests which shouldn't be reset (deleted). Need to have separate port for test
+
+mocha as dev dependency
+- config file (.mocharc.js)
+  recursive means it will run tests from every dir
+  repoter - choose format of output (spec is default)
+  bdd = beheviour driven (dfines if you use describe, it, etc)
+  file: files specified set up here will be run first. e.g. database connection
+  exit: will force exit so it doesn't hang
+add script for running mocha to scripts in package.json:
+  NODE_ENV=test mocha --config .mocharc.js
+
+create tests folders
+  integration
+  unit
+
+global functions
+  describe() - or context()
+  it() - define label, like "works" - or specify() - you can use async on the callback function
+  before() - before all it()
+  beforeEach() - before each it()
+  after and afterEach works the same
+
+UNIT TESTING
+when testing in a file. create a file with the same name and .test. e.g. crypto.test.js
+to insert what you want to test into the test file, it has to be asserted. we can use "Chai" for that". also include the functions with require
+  const assert = require('chai').assert
+  assert.notEqual(hashed, 'plaintext') - to check if content is not the same (notEqual)
+
+INTEGRATION TESTING
+testing api
+to do this we need another package. we use supertest-koa-agent (becase we are using Koa)
+  const request = require('supertest-koa-agent')
+helps to do fake http requests to api
+  include the app.js file (which is exporting itself so we can use it here)
+
+helper functions. e.g. fake folder
+'chance' dev dependency to get randomized content. e.g. chance.string, chance.email, chance.string({length: x})
+
+//
+
+You have to connect to DB in tests too. Done in bootstrap.test.js in test folder
+
+config/env/test
+  specify how to connect to db.
