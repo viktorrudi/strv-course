@@ -5,7 +5,7 @@ services:
     container_name: vrudi-db
     environment:
       POSTGRES_DB: vrudi
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: username
+      POSTGRES_PASSWORD: docker
+      POSTGRES_USER: docker
     ports:
       - 5432:5432

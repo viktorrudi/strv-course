@@ -18,6 +18,6 @@ module.exports = {
     directory: path.resolve(__dirname, './../database/migrations'),
   },
   seeds: {
-    directory: path.resolve(__dirname, './database/seeds'),
+    directory: path.resolve(__dirname, './../database/seeds'),
   },
 }
