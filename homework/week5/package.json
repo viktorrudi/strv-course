@@ -5,7 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "@strv/eslint-config-javascript": "^9.2.0",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "dotenv": "^7.0.0",
     "eslint": "^5.16.0",
     "jsonschema": "^1.2.4",
