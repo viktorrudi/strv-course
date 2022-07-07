@@ -16,7 +16,7 @@
     "koa-ejs": "^4.2.0",
     "koa-json": "^2.0.2",
     "koa-router": "^7.4.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "nodemon": "^1.18.10",
     "pino": "^5.12.2",
     "pino-pretty": "^2.6.0",
